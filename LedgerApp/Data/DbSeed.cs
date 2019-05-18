@@ -11,21 +11,24 @@ namespace LedgerApp.Data
 {
     public class DbSeed
     {
-        public static void Initialize(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public static void Initialize(ApplicationDbContext context, 
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
             context.Database.EnsureCreated();
             //creates test account
             if (userManager.FindByNameAsync("test@test.com").Result == null)
             {
-                ApplicationUser user = new ApplicationUser();
-                user.UserName = "test@test.com";
-                user.Email = "looman.dane@gmail.com";
-                user.FirstName = "John";
-                user.LastName = "Customer";
-                user.Id = "testId";
-                user.EmailConfirmed = true;
+                ApplicationUser user = new ApplicationUser {
+                UserName = "test@test.com",
+                Email = "test@test.com",
+                FirstName = "John",
+                LastName = "Customer",
+                Id = "testId",
+                EmailConfirmed = true
+            };
 
-                IdentityResult result = userManager.CreateAsync(user, "password1!").Result;
+                userManager.CreateAsync(user, "Password1234!").Wait();             
             }
             //creates sample accounts for test account
             if (!context.Accounts.Any())

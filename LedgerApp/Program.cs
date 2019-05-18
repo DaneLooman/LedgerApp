@@ -26,8 +26,9 @@ namespace LedgerApp
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    DbSeed.Initialize(context, userManager);
+                    DbSeed.Initialize(context, roleManager, userManager);
                 }
                 catch (Exception ex)
                 {
