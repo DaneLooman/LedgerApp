@@ -16,9 +16,19 @@ namespace LedgerApp.Models.BankAccountModels
         public string AccountName { get; set; }
 
            
-        ApplicationUser AccountUser { get; set; }
-        public string AccountUserId { get; set; }
-        ICollection<Transaction> AccountTransactions { get; set; }
+        public ApplicationUser AccountUser { get; set; }
+        public IEnumerable<Transaction> AccountTransactions { get; set; }
 
+        public decimal Balance()
+        {
+            decimal total = 0.00M;
+            if (AccountTransactions != null){
+                foreach (Transaction t in AccountTransactions)
+                {
+                    total = (t.TranAmt + total);
+                }
+            }
+            return total;
+        }
     }
 }

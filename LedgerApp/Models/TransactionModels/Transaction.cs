@@ -17,10 +17,8 @@ namespace LedgerApp.Models.TransactionModels
         public decimal  TranAmt { get; set; }
         public DateTime TranDate { get; set; }
         public string TranMemo { get; set; }
-        [ForeignKey("BankAccount")]
 
 
-        BankAccount TranAccount { get; set; }
-        public int TranAccountId { get; set; }
+        public BankAccount TranAccount { get; set; }
     }
 }

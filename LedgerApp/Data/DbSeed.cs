@@ -35,8 +35,8 @@ namespace LedgerApp.Data
             {
                 var accounts = new BankAccount[]
                 {
-                    new BankAccount {AccountName = "Checking", AccountUserId = "testId" },
-                    new BankAccount {AccountName = "Savings", AccountUserId = "testId" }
+                    new BankAccount {AccountName = "Checking", AccountUser = context.Users.FirstOrDefault(u => u.Id =="testId") },
+                    new BankAccount {AccountName = "Savings", AccountUser = context.Users.FirstOrDefault(u => u.Id =="testId") }
                 };
 
                 foreach (BankAccount b in accounts)
@@ -50,10 +50,10 @@ namespace LedgerApp.Data
             {
                 var transactions = new Transaction[]
                 {
-                new Transaction { TranAmt = 10.50m, TranDate = new DateTime(2018, 1, 1, 18, 30, 0), TranMemo = "Mowed Lawn Money", TranAccountId = 1  },
-                new Transaction { TranAmt = -5.05m, TranDate = new DateTime(2018, 1, 10, 18, 30, 0), TranMemo = "Pizza Hut", TranAccountId = 1  },
-                new Transaction { TranAmt = 1000.99m, TranDate = new DateTime(2018, 2, 1, 18, 30, 0), TranMemo = "Paycheck", TranAccountId = 2  },
-                new Transaction { TranAmt = -50.00m, TranDate = new DateTime(2018, 1, 1, 18, 30, 0), TranMemo = "ATM withdrawl", TranAccountId = 2 }
+                new Transaction { TranAmt = 10.50m, TranDate = new DateTime(2018, 1, 1, 18, 30, 0), TranMemo = "Mowed Lawn Money", TranAccount = context.Accounts.FirstOrDefault(a => a.AccountNum == 1)},
+                new Transaction { TranAmt = -5.05m, TranDate = new DateTime(2018, 1, 10, 18, 30, 0), TranMemo = "Pizza Hut", TranAccount = context.Accounts.FirstOrDefault(a => a.AccountNum == 1)},
+                new Transaction { TranAmt = 1000.99m, TranDate = new DateTime(2018, 2, 1, 18, 30, 0), TranMemo = "Paycheck", TranAccount = context.Accounts.FirstOrDefault(a => a.AccountNum == 2)},
+                new Transaction { TranAmt = -50.00m, TranDate = new DateTime(2018, 1, 1, 18, 30, 0), TranMemo = "ATM withdrawl", TranAccount = context.Accounts.FirstOrDefault(a => a.AccountNum == 2)}
                 };
 
                 foreach (Transaction t in transactions)

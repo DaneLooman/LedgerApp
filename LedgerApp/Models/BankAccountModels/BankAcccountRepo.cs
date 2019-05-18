@@ -1,5 +1,6 @@
 ﻿using LedgerApp.Data;
 using LedgerApp.Models.TransactionModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace LedgerApp.Models.BankAccountModels
 
         public void DeleteAccount(int bankAccountId)
         {
-            var transactionsToBeDeleted = _context.Transactions.Where(t => t.TranAccountId == bankAccountId);
+            var transactionsToBeDeleted = _context.Transactions.Where(t => t.TranAccount.AccountNum == bankAccountId);
 
             foreach(Transaction t in transactionsToBeDeleted)
             {
@@ -45,7 +46,9 @@ namespace LedgerApp.Models.BankAccountModels
 
         public IEnumerable<BankAccount> GetAllUserAccounts(string userId)
         {
-            IEnumerable<BankAccount> bankAccounts = _context.Accounts.Where(t => t.AccountUserId == userId);
+            IEnumerable<BankAccount> bankAccounts = _context
+                .Accounts.Include(a => a.AccountTransactions)
+                .Where(t => t.AccountUser.Id == userId);
             return bankAccounts;
         }
 
