@@ -54,8 +54,16 @@ namespace LedgerApp.Models.BankAccountModels
 
         public BankAccount GetBankAccount(int? bankAccountId)
         {
-            BankAccount bankAccount = _context.Accounts.FirstOrDefault(b => b.AccountNum == bankAccountId);
-            return bankAccount;
+            BankAccount bankAccount = null;
+            if (bankAccountId != null)
+            {
+                bankAccount = _context.Accounts.Include(a => a.AccountTransactions).FirstOrDefault(b => b.AccountNum == bankAccountId);
+                return bankAccount;
+            }
+            else
+            {
+                return bankAccount;
+            }
         }
     }
 }

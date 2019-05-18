@@ -23,5 +23,18 @@ namespace LedgerApp.Controllers
             var accounts = _bankAccountRepo.GetAllUserAccounts(userId);
             return View(accounts);
         }
+
+        public IActionResult Details(int? accountNum)
+        {
+            BankAccount account = _bankAccountRepo.GetBankAccount(accountNum);
+            if (account != null)
+            {
+                return View(account);
+
+            } else
+            {
+                return NotFound();
+            }
+        }
     }
 }
