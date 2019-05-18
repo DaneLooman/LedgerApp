@@ -11,13 +11,14 @@ namespace LedgerApp.Models.BankAccountModels
     public class BankAccount
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AccountNum { get; set; }
         public string AccountName { get; set; }
-        public string  AccountUserId { get; set; }
 
-        [ForeignKey("ApplicationUser")]
+           
         ApplicationUser AccountUser { get; set; }
-        IEnumerable<Transaction> AccountTransactions { get; set; }
+        public string AccountUserId { get; set; }
+        ICollection<Transaction> AccountTransactions { get; set; }
 
     }
 }

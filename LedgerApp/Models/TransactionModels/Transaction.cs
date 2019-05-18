@@ -11,13 +11,16 @@ namespace LedgerApp.Models.TransactionModels
     public class Transaction
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransId { get; set; }
-        public string TranType { get; set; }
         [Column(TypeName = "decimal(9, 2)")]
         public decimal  TranAmt { get; set; }
         public DateTime TranDate { get; set; }
         public string TranMemo { get; set; }
         [ForeignKey("BankAccount")]
+
+
         BankAccount TranAccount { get; set; }
+        public int TranAccountId { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace LedgerApp.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        IEnumerable<BankAccount> Accounts { get; set; }
+        ICollection<BankAccount> Accounts { get; set; }
     }
 }
