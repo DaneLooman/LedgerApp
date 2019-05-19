@@ -12,6 +12,7 @@ using LedgerApp.Data;
 using LedgerApp.Models;
 using LedgerApp.Services;
 using LedgerApp.Models.BankAccountModels;
+using LedgerApp.Models.TransactionModels;
 
 namespace LedgerApp
 {
@@ -42,7 +43,7 @@ namespace LedgerApp
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IBankAccountRepo, BankAccountRepo>();
-
+            services.AddTransient<ITransactionRepo, TransactionRepo>();
 
             services.AddMvc();
         }
