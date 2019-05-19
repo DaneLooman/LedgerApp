@@ -26,23 +26,27 @@ namespace LedgerApp.Controllers
             return RedirectToAction("Index", "BankAccount");
         }
 
-        public IActionResult Deposit(int? id)
+        public IActionResult Deposit(int TranAcct)
         {
-            BankAccount bankAccount = _bankContext.GetBankAccount(id);
-            Transaction transaction = new Transaction
-            {
-                TranAccount = bankAccount               
-            };
-            return View(transaction);
+           decimal TranAmt = 0.00m;
+           string TranMemo = "";
+
+            return View((TranAcct, TranMemo, TranAmt));
         }
 
         [HttpPost]
-        public IActionResult Deposit(Transaction transaction)
+        public IActionResult Deposit(int TranAcct, string TranMemo, decimal TranAmt)
         {
-            Transaction _transaction = transaction;
-            _transaction.TranDate = DateTime.Now;
+            Transaction _transaction = new Transaction
+            {
+                TranAccount = _bankContext.GetBankAccount(TranAcct),
+                TranAmt = TranAmt,
+                TranMemo = TranMemo,
+                TranDate = DateTime.Now                
+            };
+            
             _tranContext.CreateTransaction(_transaction);
-            return RedirectToAction("Index", "BankAccount", new { AccountNum = transaction.TranAccount });
+            return RedirectToAction("Index", "BankAccount", new {AccountNum = TranAcct});
         }
 
 
