@@ -20,5 +20,6 @@ namespace LedgerApp.Models.TransactionModels
 
 
         public BankAccount TranAccount { get; set; }
+        public int TranAccountId { get; set; }
     }
 }

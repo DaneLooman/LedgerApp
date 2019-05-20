@@ -65,7 +65,7 @@ namespace LedgerApp.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "BankAccount");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -232,7 +232,7 @@ namespace LedgerApp.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Details", "BankAccount");
                 }
                 AddErrors(result);
             }

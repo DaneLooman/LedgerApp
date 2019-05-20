@@ -1,4 +1,4 @@
-﻿@model (int TranAcct, string TranMemo, decimal TranAmt)
+﻿@model TransactionViewModel
 @{
     ViewData["Title"] = "Deposit";
 }
@@ -23,7 +23,11 @@
             <span asp-validation-for="TranMemo" class="text-danger"></span>
         </div>
     </div>
-    <input type="hidden" asp-for="TranAcct"/>
+    <div class="form-group">
+    @Html.LabelFor(m => m.TranAccountID)
+    @Html.DropDownListFor(m => m.TranAccountID, new SelectList(Model.Accounts, "AccountNum", "AccountName"))
+    @Html.ValidationMessageFor(m => m.TranAccountID)
+</div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <input type="submit" class="btn btn-primary" value="Deposit" />

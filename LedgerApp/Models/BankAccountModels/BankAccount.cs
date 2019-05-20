@@ -17,6 +17,8 @@ namespace LedgerApp.Models.BankAccountModels
 
            
         public ApplicationUser AccountUser { get; set; }
+        public string AccountUserId { get; set; }
+
         public IEnumerable<Transaction> AccountTransactions { get; set; }
 
         public decimal Balance()
