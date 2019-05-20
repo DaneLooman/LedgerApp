@@ -5,6 +5,7 @@
 
 <section class="container">
     <h2>All Your Accounts</h2>
+    <h3><a asp-controller="BankAccount" asp-action="MakeBankAccount">New Account</a> | <a asp-controller="Transaction" asp-action="Deposit">Deposit</a> | <a asp-controller="Transaction" asp-action="Withdraw">Withdraw</a></h3>
     @foreach (var account in Model)
     {
         <div class="col-sm-8 col-lg-6 col-md-6">
@@ -16,11 +17,5 @@
             <p>Current Balance: $@account.Balance()</p>
         </div>
     }
-</section>
-
-<section class="container">
-    <h3>
-        <a asp-controller="BankAccount" asp-action="MakeBankAccount">Create A New Account</a>
-    </h3>
 </section>
 

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>@Model.AccountName Details and History</h2>
+<h2>@Model.AccountName Details and History | Current Balance: $@Model.Balance()</h2>
 <section class="container">
     <table class="table">
         <thead>
@@ -42,15 +42,15 @@
             }
         </tbody>
     </table>
-</section>
-
-<section class="container">
     <div class="col-sm-8 col-lg-6 col-md-6">
-        <a asp-controller="Transaction" asp-action="Deposit" asp-route-TranAcct="@Model.AccountNum">
-            Deposit
-        </a>
-   </div>
-    <h2>Withdrawl</h2>
+        <h3>
+            <a asp-controller="Transaction" asp-action="Deposit">
+                Deposit
+            </a>
+        </h3>
+    </div>
     <div class="col-sm-8 col-lg-6 col-md-6">
+        <h3>
+            <a asp-controller="Transaction" asp-action="Withdraw">Withdraw</a></h3>
     </div>
 </section>

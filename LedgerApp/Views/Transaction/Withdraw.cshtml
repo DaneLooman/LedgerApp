@@ -1,15 +1,15 @@
 ﻿@model TransactionViewModel
 @{
-    ViewData["Title"] = "Deposit";
+    ViewData["Title"] = "Withdraw";
 }
 
-<h2>Create a Deposit</h2>
-<form asp-action="Deposit" method="post" class="form-horizontal" role="form">
+<h2>Create a Withdraw</h2>
+<form asp-action="Withdraw" method="post" class="form-horizontal" role="form">
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
-        <label asp-for="TranAmt" class="col-md-2 control-label">Enter deposit in format 00.00</label>
+        <label asp-for="TranAmt" class="col-md-2 control-label">Enter Withdraw in format 00.00</label>
         <div class="col-md-5">
             <input asp-for="TranAmt" class="form-control" />
             <span asp-validation-for="TranAmt" class="text-danger"></span>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">Chose Deposit Account </label>
+        <label class="col-md-2 control-label">Chose Withdraw Account </label>
         <div class="col-md-5">
             @Html.DropDownListFor(m => m.TranAccountID, new SelectList(Model.Accounts, "AccountNum", "AccountName"))
             @Html.ValidationMessageFor(m => m.TranAccountID)
@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
-            <input type="submit" class="btn btn-primary" value="Deposit" />
+            <input type="submit" class="btn btn-primary" value="Withdraw" />
         </div>
     </div>
 </form>

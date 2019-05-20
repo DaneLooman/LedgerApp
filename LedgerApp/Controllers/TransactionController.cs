@@ -56,7 +56,37 @@ namespace LedgerApp.Controllers
 
             return View(transaction);
         }
+        public IActionResult Withdraw()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ApplicationUser user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            IEnumerable<BankAccount> accounts = _bankContext.GetAllUserAccounts(user.Id);
 
+            TransactionViewModel viewModel = new TransactionViewModel
+            {
+                Accounts = accounts
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Withdraw(Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+                transaction.TranAccount = _bankContext.GetBankAccount(transaction.TranAccountId);
+                if (transaction.TranAmt < transaction.TranAccount.Balance())
+                {
+                    transaction.TranAmt = transaction.TranAmt * (-1);
+                    transaction.TranDate = DateTime.Now;
+                    _tranContext.CreateTransaction(transaction);
+                    return RedirectToAction("Details", "BankAccount", new { AccountNum = transaction.TranAccountId });
+                }
+            }
+
+            return View(transaction);
+        }
 
     }
 }
