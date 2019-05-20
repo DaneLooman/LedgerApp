@@ -11,9 +11,10 @@ using System;
 namespace LedgerApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190518191533_fixedFKs")]
+    partial class fixedFKs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +97,7 @@ namespace LedgerApp.Data.Migrations
                     b.Property<int>("TransId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("TranAccountId");
+                    b.Property<int?>("TranAccountAccountNum");
 
                     b.Property<decimal>("TranAmt")
                         .HasColumnType("decimal(9, 2)");
@@ -107,7 +108,7 @@ namespace LedgerApp.Data.Migrations
 
                     b.HasKey("TransId");
 
-                    b.HasIndex("TranAccountId");
+                    b.HasIndex("TranAccountAccountNum");
 
                     b.ToTable("Transactions");
                 });
@@ -231,8 +232,7 @@ namespace LedgerApp.Data.Migrations
                 {
                     b.HasOne("LedgerApp.Models.BankAccountModels.BankAccount", "TranAccount")
                         .WithMany("AccountTransactions")
-                        .HasForeignKey("TranAccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TranAccountAccountNum");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

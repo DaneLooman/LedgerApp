@@ -11,9 +11,10 @@ using System;
 namespace LedgerApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190518022132_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,8 +87,6 @@ namespace LedgerApp.Data.Migrations
 
                     b.HasKey("AccountNum");
 
-                    b.HasIndex("AccountUserId");
-
                     b.ToTable("Accounts");
                 });
 
@@ -106,8 +105,6 @@ namespace LedgerApp.Data.Migrations
                     b.Property<string>("TranMemo");
 
                     b.HasKey("TransId");
-
-                    b.HasIndex("TranAccountId");
 
                     b.ToTable("Transactions");
                 });
@@ -218,21 +215,6 @@ namespace LedgerApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("LedgerApp.Models.BankAccountModels.BankAccount", b =>
-                {
-                    b.HasOne("LedgerApp.Models.ApplicationUser", "AccountUser")
-                        .WithMany("Accounts")
-                        .HasForeignKey("AccountUserId");
-                });
-
-            modelBuilder.Entity("LedgerApp.Models.TransactionModels.Transaction", b =>
-                {
-                    b.HasOne("LedgerApp.Models.BankAccountModels.BankAccount", "TranAccount")
-                        .WithMany("AccountTransactions")
-                        .HasForeignKey("TranAccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

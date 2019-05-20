@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LedgerApp.Models;
+using LedgerApp.Models.BankAccountModels;
+using LedgerApp.Models.TransactionModels;
 
 namespace LedgerApp.Data
 {
@@ -12,10 +14,13 @@ namespace LedgerApp.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-        }
+        { }
+        //DB Sets
+        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<BankAccount> Accounts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.

@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using LedgerApp.Data;
 using LedgerApp.Models;
 using LedgerApp.Services;
+using LedgerApp.Models.BankAccountModels;
+using LedgerApp.Models.TransactionModels;
 
 namespace LedgerApp
 {
@@ -29,12 +31,19 @@ namespace LedgerApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                // Signin settings
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+          
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IBankAccountRepo, BankAccountRepo>();
+            services.AddTransient<ITransactionRepo, TransactionRepo>();
 
             services.AddMvc();
         }

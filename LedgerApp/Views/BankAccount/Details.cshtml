@@ -1,0 +1,56 @@
+﻿@model BankAccount
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Model.AccountName Details and History</h2>
+<section class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Transaction Number
+                </th>
+                <th>
+                    Transaction Date
+                </th>
+                <th>
+                    Transaction Amount
+                </th>
+                <th>
+                    Transaction Memo
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Transaction t in Model.AccountTransactions)
+            {
+                <tr>
+                    <td>
+                        @t.TransId
+                    </td>
+                    <td>
+                        @t.TranDate.ToShortDateString()
+                    </td>
+                    <td>
+                        $@t.TranAmt
+                    </td>
+                    <td>
+                        @t.TranMemo
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+<section class="container">
+    <div class="col-sm-8 col-lg-6 col-md-6">
+        <a asp-controller="Transaction" asp-action="Deposit" asp-route-TranAcct="@Model.AccountNum">
+            Deposit
+        </a>
+   </div>
+    <h2>Withdrawl</h2>
+    <div class="col-sm-8 col-lg-6 col-md-6">
+    </div>
+</section>
