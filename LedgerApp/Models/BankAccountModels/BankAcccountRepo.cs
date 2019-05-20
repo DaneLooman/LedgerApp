@@ -1,10 +1,11 @@
 ﻿using LedgerApp.Data;
 using LedgerApp.Models.TransactionModels;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.AspNetCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace LedgerApp.Models.BankAccountModels
 {

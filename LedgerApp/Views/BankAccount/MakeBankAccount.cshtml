@@ -1,0 +1,24 @@
+﻿@model  BankAccount
+@{
+    ViewData["Title"] = "MakeBankAccount";
+}
+
+<form asp-action="MakeBankAccount" method="post" class="form-horizontal" role="form">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="AccountName" class="col-md-2 control-label">Nick Name Account</label>
+        <div class="col-md-5">
+            <input asp-for="AccountName" class="form-control" />
+            <span asp-validation-for="AccountName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Create Account" />
+        </div>
+    </div>
+</form>
+
